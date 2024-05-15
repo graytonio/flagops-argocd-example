@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-app
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - matrix:
+      generators:
+        - git:
+            repoURL: https://github.com/graytonio/flagops-argocd-demo.git
+            revision: HEAD
+            directories:
+              - path: apps/*
+        - list:
+            elements:
+              - cluster: flagops-dev-use
+                url: https://kubernetes.default.svc
+              - cluster: flagops-dev-usc
+                url: https://kubernetes.default.svc
+              - cluster: flagops-dev-usw
+                url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: '{{.path.basename}}-{{.cluster}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/graytonio/flagops-argocd-demo.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+        plugin:
+          name: flagops-plugin-helm
+          env:
+            - name: FLAGOPS_ENVIRONMENT
+              value: production
+            - name: FLAGOPS_PROP_OWNER
+              value: graytonw
+            - name: FLAGOPS_PROP_CLUSTER
+              value: '{{.cluster}}'
+      destination:
+        server: '{{.url}}'
+        namespace: '{{.path.basename}}-{{.cluster}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true

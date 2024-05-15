@@ -1,0 +1,6 @@
+cloneStaticSiteFromGit:
+  enabled: true
+  repository: https://github.com/mdn/beginner-html-site-styled.git
+  branch: master
+
+replicas: [{ env "nginx_replicas" }]

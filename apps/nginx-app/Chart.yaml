@@ -1,0 +1,9 @@
+apiVersion: v2
+name: example-nginx-deployment
+description: Nginx Deployment
+type: application
+version: 0.1.0
+dependencies:
+  - name: nginx
+    repository: https://charts.bitnami.com/bitnami
+    version: 17.0.1
