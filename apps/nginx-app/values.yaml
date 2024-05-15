@@ -4,4 +4,4 @@ nginx:
     repository: https://github.com/mdn/beginner-html-site-styled.git
     branch: master
 
-  replicaCount: [{ env "nginx_replicas" }]
+  replicaCount: 3
