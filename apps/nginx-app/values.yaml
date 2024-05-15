@@ -1,6 +1,6 @@
 nginx:
-  cloneStaticSiteFromGit:
 [{- if env "demo_app_enabled" }]
+  cloneStaticSiteFromGit:
     enabled: true
     repository: https://github.com/mdn/beginner-html-site-styled.git
     branch: master
