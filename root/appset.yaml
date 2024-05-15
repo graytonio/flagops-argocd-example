@@ -35,7 +35,7 @@ spec:
           name: flagops-plugin-helm
           env:
             - name: FLAGOPS_ENVIRONMENT
-              value: production
+              value: testing
             - name: FLAGOPS_PROP_OWNER
               value: graytonw
             - name: FLAGOPS_PROP_CLUSTER
