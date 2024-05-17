@@ -26,7 +26,7 @@ spec:
     metadata:
       name: '{{.path.basename}}-{{.cluster}}'
     spec:
-      project: "default"
+      project: "demo"
       source:
         repoURL: https://github.com/graytonio/flagops-argocd-example.git
         targetRevision: HEAD
